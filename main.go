@@ -6,7 +6,9 @@ import (
 	/**************************************************/
 	"github.com/savsgio/atreugo/v10"
     "go-api/app/controllers"
+    ggn_config "go-api/config"
     "go-api/class"
+    //"fmt"
     /**************************************************/
 	/**************************************************/
 	/**************************************************/
@@ -16,7 +18,7 @@ func main() {
 	/****************** config server *****************/
 	/**************************************************/
 	// config port and addres
-    config := &atreugo.Config{ Addr: "0.0.0.0:9002", }
+    config := &atreugo.Config{ Addr: ggn_config.Server_name+":"+ggn_config.PORT, }
 	server := atreugo.New(config)
 	// run before rout
 	server.UseBefore(Acl.Auth)
