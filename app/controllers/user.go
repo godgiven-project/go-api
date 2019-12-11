@@ -2,6 +2,9 @@ package controllers
 
 import (
 	"github.com/savsgio/atreugo/v10"
+	"go-api/class/functions"
+	_"encoding/json"
+	// "fmt"
 )
 func User(ctx *atreugo.RequestCtx) error  {
     /*name  := ctx.Params().Get("name")
@@ -10,10 +13,11 @@ func User(ctx *atreugo.RequestCtx) error  {
 }
 
 func Login(ctx *atreugo.RequestCtx) error {
-	username :=string( functions.Strip_tags(ctx.URLParam("username")))
-	password :=string( functions.Strip_tags(ctx.URLParam("password")))
+	username := string( functions.Validate_data(string(ctx.FormValue("username")) ))
+	password := string( functions.Validate_data(string(ctx.FormValue("password")) ))
 
-	if functions.IsEmpty(username) || functions.IsEmpty(password){
-		return ctx.TextResponse(string("error") )
-	}
+	// if functions.IsEmpty(username) || functions.IsEmpty(password){
+	// 	return ctx.TextResponse(string("error") )
+	// }
+	return ctx.TextResponse( string(username+password) )
 }

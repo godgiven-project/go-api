@@ -8,7 +8,7 @@ import (
 	"encoding/json"
 	"strings"
 	"regexp"
-	"fmt"
+	// "fmt"
 )
 var aclList = config.AclList
 type Token_data struct {
@@ -22,19 +22,19 @@ func Auth(ctx *atreugo.RequestCtx) error {
 	sKey := config.Security_key
 	reqToken := string(ctx.Request.Header.Peek("Authorization"))
 	Token := strings.TrimSpace( strings.ReplaceAll(reqToken,"Bearer " , "") )
-	Token = "EEsnEhwZaSoSZnJLeVJicG1HUHMFX3dGTW4JBx0MDT4LBiIjZ31heENMYns7RTU7HhQXME1CZg0qAVlcOUBKcgY7AVRTfhI9XBBULCwCInUW"
+	//Token = "EEsnEhwZaSoSZnJLeVJicG1HUHMFX3dGTW4JBx0MDT4LBiIjZ31heENMYns7RTU7HhQXME1CZg0qAVlcOUBKcgY7AVRTfhI9XBBULCwCInUW"
 	//fmt.Println(string(sKey))
 	TokenDbase64 , _ := base64.StdEncoding.DecodeString( Token )
-	TokenD := ggn_encryption.Xor(string(TokenDbase64), sKey )
+	TokenD := ggn_encryption.Decrypt(string(TokenDbase64), sKey )
 	
-	fmt.Println(TokenD)
+	//fmt.Println(TokenD)
 	var Valid_Token Token_data
 	//var Valid_Token map[string]interface{}
 	Invalid_Token := json.Unmarshal([]byte(TokenD), &Valid_Token)
 	if(Invalid_Token != nil){
-		//fmt.Println(Invalid_Token)
+		user_permissions = 1
 	}else{
-		fmt.Println("ok")
+		//fmt.Println("ok")
 		user_permissions = Valid_Token.Premission
 	}
 	// Auth function for test IsAllow test

@@ -16,7 +16,7 @@ func main() {
 	/****************** config server *****************/
 	/**************************************************/
 	// config port and addres
-    config := &atreugo.Config{ Addr: "0.0.0.0:8000", }
+    config := &atreugo.Config{ Addr: "0.0.0.0:9002", }
 	server := atreugo.New(config)
 	// run before rout
 	server.UseBefore(Acl.Auth)
@@ -27,6 +27,7 @@ func main() {
 	/*server.PathWithFilters("GET","/",,filters)
 	server.PathWithFilters("GET","/user",controllers.User,filters)*/
 	server.Path("GET", "/", controllers.Root)
+	server.Path("POST", "/Login", controllers.Login)
 	server.Path("GET", "/user", controllers.User)
     /**************************************************/
 	/**************** run server ggn ******************/
